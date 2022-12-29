@@ -46,7 +46,7 @@ namespace Shopping.ProductAPI.Repositories
         {
             var _product = _mapper.Map<Product>(product);
 
-            _context.Products.Add(_product);
+            _context.Products.Update(_product);
 
             await _context.SaveChangesAsync();
 
