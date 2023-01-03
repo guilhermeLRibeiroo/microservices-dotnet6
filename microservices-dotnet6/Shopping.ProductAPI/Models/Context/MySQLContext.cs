@@ -10,5 +10,28 @@ namespace Shopping.ProductAPI.Models.Context
         public MySQLContext(DbContextOptions<MySQLContext> options) : base(options) { }
 
         public DbSet<Product> Products { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Product>().HasData(new Product
+            {
+                Id = 2,
+                Name = "Product Name",
+                Price = new decimal(100.5),
+                Description = "Product Description",
+                ImageURL = "imageurl",
+                CategoryName = "Product Category"
+            });
+
+            modelBuilder.Entity<Product>().HasData(new Product
+            {
+                Id = 3,
+                Name = "Another Product Name",
+                Price = new decimal(100.5),
+                Description = "Product Description 3",
+                ImageURL = "imageurl",
+                CategoryName = "Product Category"
+            });
+        }
     }
 }
