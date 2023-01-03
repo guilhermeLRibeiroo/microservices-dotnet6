@@ -1,4 +1,11 @@
+using Shopping.Web.Services;
+using Shopping.Web.Services.IServices;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddHttpClient<IProductService, ProductService>(
+        config => config.BaseAddress = new Uri(builder.Configuration.GetValue<string>("ServicesUrls:ProductAPI"))
+    );
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
