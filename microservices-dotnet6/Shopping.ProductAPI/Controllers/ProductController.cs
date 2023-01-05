@@ -6,7 +6,7 @@ namespace Shopping.ProductAPI.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class ProductController 
+    public class ProductController
         : ControllerBase
     {
         private IProductRepository _repository;
@@ -36,9 +36,9 @@ namespace Shopping.ProductAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(ProductVO productVO)
+        public async Task<IActionResult> Create([FromBody] ProductVO productVO)
         {
-            if(productVO == null)
+            if (productVO == null)
                 return BadRequest();
 
             var product = await _repository.Create(productVO);
@@ -46,7 +46,7 @@ namespace Shopping.ProductAPI.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> Update(ProductVO productVO)
+        public async Task<IActionResult> Update([FromBody] ProductVO productVO)
         {
             if (productVO == null)
                 return BadRequest();
@@ -59,7 +59,7 @@ namespace Shopping.ProductAPI.Controllers
         public async Task<IActionResult> Delete(long id)
         {
             var status = await _repository.Delete(id);
-            if(!status) return BadRequest();
+            if (!status) return BadRequest();
             return Ok(status);
         }
     }
