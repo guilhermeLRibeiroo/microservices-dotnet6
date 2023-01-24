@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IdentityServer.Migrations
 {
     [DbContext(typeof(MySQLContext))]
-    [Migration("20230124155429_AddDefaultSecurityTableOnDB")]
+    [Migration("20230124163251_AddDefaultSecurityTableOnDB")]
     partial class AddDefaultSecurityTableOnDB
     {
         /// <inheritdoc />

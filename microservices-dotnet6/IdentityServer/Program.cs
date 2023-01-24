@@ -1,4 +1,5 @@
 using IdentityServer.Configuration;
+using IdentityServer.Initializer;
 using IdentityServer.Models;
 using IdentityServer.Models.Context;
 using Microsoft.AspNetCore.Identity;
@@ -29,10 +30,14 @@ var identityServerServiceBuilder = builder.Services.AddIdentityServer(options =>
 
 identityServerServiceBuilder.AddDeveloperSigningCredential();
 
+builder.Services.AddScoped<IDbInitializer, DbInitializer>();
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
+
+var initializer = app.Services.CreateScope().ServiceProvider.GetService<IDbInitializer>();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -49,6 +54,8 @@ app.UseRouting();
 app.UseIdentityServer();
 
 app.UseAuthorization();
+
+initializer.Initialize();
 
 app.MapControllerRoute(
     name: "default",
