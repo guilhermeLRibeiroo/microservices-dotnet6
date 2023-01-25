@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Shopping.ProductAPI.Repositories;
+using Shopping.ProductAPI.Utils;
 using Shopping.ProductAPI.ValueObjects;
 
 namespace Shopping.ProductAPI.Controllers
@@ -18,6 +20,7 @@ namespace Shopping.ProductAPI.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> FindAll()
         {
             var products = await _repository.FindAll();
@@ -25,6 +28,7 @@ namespace Shopping.ProductAPI.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<IActionResult> FindById(long id)
         {
             var product = await _repository.FindById(id);
@@ -36,6 +40,7 @@ namespace Shopping.ProductAPI.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Create([FromBody] ProductVO productVO)
         {
             if (productVO == null)
@@ -46,6 +51,7 @@ namespace Shopping.ProductAPI.Controllers
         }
 
         [HttpPut]
+        [Authorize]
         public async Task<IActionResult> Update([FromBody] ProductVO productVO)
         {
             if (productVO == null)
@@ -56,6 +62,7 @@ namespace Shopping.ProductAPI.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = Role.Admin)]
         public async Task<IActionResult> Delete(long id)
         {
             var status = await _repository.Delete(id);

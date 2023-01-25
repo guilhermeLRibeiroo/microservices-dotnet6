@@ -33,7 +33,7 @@ namespace IdentityServer.Configuration
                     ClientId = "client",
                     ClientSecrets =
                     {
-                        new Secret("this_secret_should_be_at_appsettings".Sha256())
+                        new Secret("secret_secret".Sha256())
                     },
                     AllowedGrantTypes = GrantTypes.ClientCredentials,
                     AllowedScopes =
@@ -48,7 +48,7 @@ namespace IdentityServer.Configuration
                     ClientId = "shopping",
                     ClientSecrets =
                     {
-                        new Secret("this_secret_should_be_at_appsettings".Sha256())
+                        new Secret("secret_secret".Sha256())
                     },
                     AllowedGrantTypes = GrantTypes.Code,
                     RedirectUris =
