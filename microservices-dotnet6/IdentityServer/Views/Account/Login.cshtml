@@ -66,11 +66,16 @@
                                        asp-action="Challenge"
                                        asp-route-scheme="@provider.AuthenticationScheme"
                                        asp-route-returnUrl="@Model.ReturnUrl">
-                                        @provider.DisplayName
+                                       @provider.DisplayName
                                     </a>
                                 </li>
                             }
                         </ul>
+                    </div>
+                    <div class="card-footer">
+                        <a href="@Url.Action("Register", new {Model.ReturnUrl})">
+                            New User? Create an Account!
+                        </a>
                     </div>
                 </div>
             </div>

@@ -26,7 +26,7 @@ builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddControllers();
 
 builder.Services.AddAuthentication("Bearer")
-    .AddJwtBearer(options =>
+    .AddJwtBearer("Bearer", options =>
     {
         options.Authority = builder.Configuration.GetValue<string>("ServiceUrls:IdentityServer");
         options.TokenValidationParameters = new TokenValidationParameters
