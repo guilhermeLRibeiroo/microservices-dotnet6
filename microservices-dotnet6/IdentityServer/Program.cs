@@ -1,7 +1,9 @@
+using Duende.IdentityServer.Services;
 using IdentityServer.Configuration;
 using IdentityServer.Initializer;
 using IdentityServer.Models;
 using IdentityServer.Models.Context;
+using IdentityServer.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -31,6 +33,7 @@ var identityServerServiceBuilder = builder.Services.AddIdentityServer(options =>
 identityServerServiceBuilder.AddDeveloperSigningCredential();
 
 builder.Services.AddScoped<IDbInitializer, DbInitializer>();
+builder.Services.AddScoped<IProfileService, ProfileService>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
