@@ -19,8 +19,7 @@ namespace Shopping.Web.Controllers
         [Authorize]
         public async Task<IActionResult> Index()
         {
-            var access_token = await HttpContext.GetTokenAsync("access_token");
-            var products = await _productService.FindAll(access_token);
+            var products = await _productService.FindAll();
             return View(products);
         }
 
