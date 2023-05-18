@@ -41,10 +41,12 @@ namespace Shopping.CartAPI.Repositories
 
         public async Task<CartVO> FindCartByUserId(string userId)
         {
-            Cart cart = new()
-            {
-                CartHeader = await _context.CartHeaders.FirstOrDefaultAsync(c => c.UserId == userId)
-            };
+            var cart = new Cart();
+
+            cart.CartHeader = await _context.CartHeaders.FirstOrDefaultAsync(c => c.UserId == userId);
+
+            if (cart.CartHeader == null)
+                return null;
 
             cart.CartDetails = _context.CartDetails
                 .Where(c => c.CartHeaderId == cart.CartHeader.Id)
@@ -109,12 +111,12 @@ namespace Shopping.CartAPI.Repositories
                 var cartDetail = await _context
                                     .CartDetails
                                     .AsNoTracking()
-                                    .FirstOrDefaultAsync(c => c.ProductId == cartVO.CartDetails.FirstOrDefault().ProductId
+                                    .FirstOrDefaultAsync(c => c.ProductId == cart.CartDetails.FirstOrDefault().ProductId
                                                            && c.CartHeaderId == cartHeader.Id);
 
                 if(cartDetail == null)
                 {
-                    cart.CartDetails.FirstOrDefault().CartHeaderId = cart.CartHeader.Id;
+                    cart.CartDetails.FirstOrDefault().CartHeaderId = cartHeader.Id;
                     cart.CartDetails.FirstOrDefault().Product = null;
 
                     _context.CartDetails.Add(cart.CartDetails.FirstOrDefault());

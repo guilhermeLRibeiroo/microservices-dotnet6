@@ -31,7 +31,7 @@ namespace Shopping.Web.Controllers
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Create(ProductModel product)
+        public async Task<IActionResult> Create(ProductViewModel product)
         {
             if (ModelState.IsValid)
             {
@@ -59,7 +59,7 @@ namespace Shopping.Web.Controllers
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Update(ProductModel product)
+        public async Task<IActionResult> Update(ProductViewModel product)
         {
             if (ModelState.IsValid)
             {
@@ -87,7 +87,7 @@ namespace Shopping.Web.Controllers
 
         [HttpPost]
         [Authorize(Roles = Role.Admin)]
-        public async Task<IActionResult> Delete(ProductModel product)
+        public async Task<IActionResult> Delete(ProductViewModel product)
         {
             var access_token = await HttpContext.GetTokenAsync("access_token");
             var response = await _productService.DeleteById(product.Id, access_token);
