@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shopping.ProductAPI", "Shop
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer", "IdentityServer\IdentityServer.csproj", "{7189124E-3810-4165-8F31-52D698D25C51}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shopping.CartAPI", "Shopping.CartAPI\Shopping.CartAPI.csproj", "{36A8FDF7-1F2E-4C30-85CD-C3D0610AB55A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shopping.CartAPI", "Shopping.CartAPI\Shopping.CartAPI.csproj", "{36A8FDF7-1F2E-4C30-85CD-C3D0610AB55A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shopping.CouponAPI", "Shopping.CouponAPI\Shopping.CouponAPI.csproj", "{CE3E8A97-9AA6-4799-9A76-D5F69F4FBACC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,6 +39,10 @@ Global
 		{36A8FDF7-1F2E-4C30-85CD-C3D0610AB55A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{36A8FDF7-1F2E-4C30-85CD-C3D0610AB55A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{36A8FDF7-1F2E-4C30-85CD-C3D0610AB55A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE3E8A97-9AA6-4799-9A76-D5F69F4FBACC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE3E8A97-9AA6-4799-9A76-D5F69F4FBACC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE3E8A97-9AA6-4799-9A76-D5F69F4FBACC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE3E8A97-9AA6-4799-9A76-D5F69F4FBACC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -46,6 +52,7 @@ Global
 		{0EDE4F0F-8B0E-4DDB-B419-ED8E46219437} = {3320DA15-372A-4328-9A87-3E37F05696FC}
 		{7189124E-3810-4165-8F31-52D698D25C51} = {3320DA15-372A-4328-9A87-3E37F05696FC}
 		{36A8FDF7-1F2E-4C30-85CD-C3D0610AB55A} = {3320DA15-372A-4328-9A87-3E37F05696FC}
+		{CE3E8A97-9AA6-4799-9A76-D5F69F4FBACC} = {3320DA15-372A-4328-9A87-3E37F05696FC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E437BE71-FCFE-409B-A6C4-F1A7BBD31964}
