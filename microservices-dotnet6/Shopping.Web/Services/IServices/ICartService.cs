@@ -8,7 +8,7 @@ namespace Shopping.Web.Services.IServices
         Task<CartViewModel> AddItemToCart(CartViewModel cart, string accessToken);
         Task<CartViewModel> UpdateCart(CartViewModel cart, string accessToken);
         Task<bool> RemoveFromCart(long cartDetailId, string accessToken);
-        Task<bool> ApplyCoupon(CartViewModel cart, string couponCode, string accessToken);
+        Task<bool> ApplyCoupon(CartViewModel cart, string accessToken);
         Task<bool> RemoveCoupon(string userId, string accessToken);
         Task<bool> ClearCart(string userId, string accessToken);
         Task<CartViewModel> Checkout(CartHeaderViewModel cartHeader, string accessToken);

@@ -56,9 +56,26 @@ namespace Shopping.Web.Services
             return await response.ReadContentAs<bool>();
         }
 
-        public Task<bool> ApplyCoupon(CartViewModel cart, string couponCode, string accessToken)
+        public async Task<bool> ApplyCoupon(CartViewModel cart, string accessToken)
         {
-            throw new NotImplementedException();
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+            var response = await _client.PostAsJson($"{BasePath}/apply-coupon", cart);
+
+            if (!response.IsSuccessStatusCode)
+                throw new Exception("Something went wrong.");
+
+            return await response.ReadContentAs<bool>();
+        }
+
+        public async Task<bool> RemoveCoupon(string userId, string accessToken)
+        {
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+            var response = await _client.DeleteAsync($"{BasePath}/remove-coupon/{userId}");
+
+            if (!response.IsSuccessStatusCode)
+                throw new Exception("Something went wrong.");
+
+            return await response.ReadContentAs<bool>();
         }
 
         public Task<CartViewModel> Checkout(CartHeaderViewModel cartHeader, string accessToken)
@@ -67,11 +84,6 @@ namespace Shopping.Web.Services
         }
 
         public Task<bool> ClearCart(string userId, string accessToken)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> RemoveCoupon(string userId, string accessToken)
         {
             throw new NotImplementedException();
         }

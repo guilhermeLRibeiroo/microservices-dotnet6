@@ -1,6 +1,6 @@
-﻿namespace Shopping.CouponAPI.Data.ValueObjects
+﻿namespace Shopping.Web.Models
 {
-    public class CouponVO
+    public class CouponViewModel
     {
         public long Id { get; set; }
         public string Code { get; set; }
