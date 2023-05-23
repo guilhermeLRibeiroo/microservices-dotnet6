@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Shopping.CartAPI.Data.ValueObjects;
+using Shopping.CartAPI.Messages;
 using Shopping.CartAPI.Repositories;
 
 namespace Shopping.CartAPI.Controllers
@@ -62,6 +63,20 @@ namespace Shopping.CartAPI.Controllers
             var status = await _cartRepository.RemoveCoupon(userId);
             if (!status) return NotFound();
             return Ok(status);
+        }
+
+        [HttpPost("checkout")]
+        public async Task<ActionResult<CheckoutHeaderVO>> Checkout(CheckoutHeaderVO checkoutHeader)
+        {
+            var cart = await _cartRepository.FindCartByUserId(checkoutHeader.UserId);
+            if (cart == null) return NotFound();
+
+            checkoutHeader.CartDetails = cart.CartDetails;
+            checkoutHeader.DateTime = DateTime.Now;
+
+            //Rabbit MQ
+
+            return Ok(checkoutHeader);
         }
     }
 }

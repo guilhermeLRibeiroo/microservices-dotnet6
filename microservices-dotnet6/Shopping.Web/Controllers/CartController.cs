@@ -20,7 +20,6 @@ namespace Shopping.Web.Controllers
             _couponService = couponService;
         }
 
-
         [Authorize]
         public async Task<IActionResult> Index()
         {
@@ -31,6 +30,27 @@ namespace Shopping.Web.Controllers
         public async Task<IActionResult> Checkout()
         {
             return View(await FindUserCart());
+        }
+
+        [Authorize]
+        public async Task<IActionResult> Confirmation()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> Checkout(CartViewModel cart)
+        {
+            var token = await HttpContext.GetTokenAsync("access_token");
+            var response = await _cartService.Checkout(cart.CartHeader, token);
+
+            if(response != null)
+            {
+                return RedirectToAction(nameof(Confirmation));
+            }
+
+            return View(cart);
         }
 
         public async Task<IActionResult> Remove(long cartDetailId) 

@@ -11,6 +11,6 @@ namespace Shopping.Web.Services.IServices
         Task<bool> ApplyCoupon(CartViewModel cart, string accessToken);
         Task<bool> RemoveCoupon(string userId, string accessToken);
         Task<bool> ClearCart(string userId, string accessToken);
-        Task<CartViewModel> Checkout(CartHeaderViewModel cartHeader, string accessToken);
+        Task<CartHeaderViewModel> Checkout(CartHeaderViewModel cartHeader, string accessToken);
     }
 }

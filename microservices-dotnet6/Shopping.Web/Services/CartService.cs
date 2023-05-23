@@ -78,9 +78,15 @@ namespace Shopping.Web.Services
             return await response.ReadContentAs<bool>();
         }
 
-        public Task<CartViewModel> Checkout(CartHeaderViewModel cartHeader, string accessToken)
+        public async Task<CartHeaderViewModel> Checkout(CartHeaderViewModel cartHeader, string accessToken)
         {
-            throw new NotImplementedException();
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+            var response = await _client.PostAsJson($"{BasePath}/checkout", cartHeader);
+
+            if (!response.IsSuccessStatusCode)
+                throw new Exception("Something went wrong.");
+             
+            return await response.ReadContentAs<CartHeaderViewModel>();
         }
 
         public Task<bool> ClearCart(string userId, string accessToken)
