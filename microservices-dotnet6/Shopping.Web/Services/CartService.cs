@@ -1,6 +1,7 @@
 ﻿using Shopping.Web.Models;
 using Shopping.Web.Services.IServices;
 using Shopping.Web.Utils;
+using System.Net;
 using System.Net.Http.Headers;
 
 namespace Shopping.Web.Services
@@ -78,13 +79,21 @@ namespace Shopping.Web.Services
             return await response.ReadContentAs<bool>();
         }
 
-        public async Task<CartHeaderViewModel> Checkout(CartHeaderViewModel cartHeader, string accessToken)
+        public async Task<object> Checkout(CartHeaderViewModel cartHeader, string accessToken)
         {
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
             var response = await _client.PostAsJson($"{BasePath}/checkout", cartHeader);
 
             if (!response.IsSuccessStatusCode)
+            {
+                switch(response.StatusCode)
+                {
+                    case HttpStatusCode.PreconditionFailed:
+                        return "The discount amount has changed, please confirm!";
+                }
+                
                 throw new Exception("Something went wrong.");
+            }
              
             return await response.ReadContentAs<CartHeaderViewModel>();
         }

@@ -1,8 +1,10 @@
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Shopping.CartAPI.Data.ValueObjects;
 using Shopping.CartAPI.Messages;
 using Shopping.CartAPI.RabbitMQSender;
 using Shopping.CartAPI.Repositories;
+using System.Net;
 
 namespace Shopping.CartAPI.Controllers
 {
@@ -12,11 +14,13 @@ namespace Shopping.CartAPI.Controllers
         : ControllerBase
     {
         private ICartRepository _cartRepository;
+        private ICouponRepository _couponRepository;
         private IRabbitMQMessageSender _rabbitMQMessageSender;
 
-        public CartController(ICartRepository cartRepository, IRabbitMQMessageSender rabbitMQMessageSender)
+        public CartController(ICartRepository cartRepository, ICouponRepository couponRepository, IRabbitMQMessageSender rabbitMQMessageSender)
         {
             _cartRepository = cartRepository ?? throw new ArgumentNullException(nameof(cartRepository));
+            _couponRepository = couponRepository ?? throw new ArgumentNullException(nameof(couponRepository));
             _rabbitMQMessageSender = rabbitMQMessageSender ?? throw new ArgumentNullException(nameof(rabbitMQMessageSender));
         }
 
@@ -71,10 +75,20 @@ namespace Shopping.CartAPI.Controllers
         [HttpPost("checkout")]
         public async Task<ActionResult<CheckoutHeaderVO>> Checkout(CheckoutHeaderVO checkoutHeader)
         {
-            if(checkoutHeader?.UserId == null) return BadRequest();
+            var access_token = await HttpContext.GetTokenAsync("access_token");
+            if (checkoutHeader?.UserId == null) return BadRequest();
 
             var cart = await _cartRepository.FindCartByUserId(checkoutHeader.UserId);
             if (cart == null) return NotFound();
+
+            if (!string.IsNullOrEmpty(checkoutHeader.CouponCode))
+            {
+                CouponVO coupon = await _couponRepository.GetCouponByCode(checkoutHeader.CouponCode, access_token);
+                if(coupon.DiscountAmount != checkoutHeader.DiscountAmount)
+                {
+                    return StatusCode((int)HttpStatusCode.PreconditionFailed);
+                }
+            }
 
             checkoutHeader.CartDetails = cart.CartDetails;
             checkoutHeader.DateTime = DateTime.Now;

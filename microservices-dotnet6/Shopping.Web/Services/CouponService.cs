@@ -1,8 +1,9 @@
 ﻿using Shopping.Web.Models;
+using Shopping.Web.Services.IServices;
 using Shopping.Web.Utils;
 using System.Net.Http.Headers;
 
-namespace Shopping.Web.Services.IServices
+namespace Shopping.Web.Services
 {
     public class CouponService
        : ICouponService
@@ -20,7 +21,7 @@ namespace Shopping.Web.Services.IServices
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
             var response = await _client.GetAsync($"{BasePath}/{code}");
 
-            if(!response.IsSuccessStatusCode)
+            if (!response.IsSuccessStatusCode)
             {
                 return new CouponViewModel();
             }
