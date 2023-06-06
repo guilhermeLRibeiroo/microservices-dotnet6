@@ -1,10 +1,10 @@
 ﻿using RabbitMQ.Client;
-using Shopping.CartAPI.Messages;
+using Shopping.PaymentAPI.Messages;
 using Shopping.MessageBus;
 using System.Text;
 using System.Text.Json;
 
-namespace Shopping.CartAPI.RabbitMQSender
+namespace Shopping.PaymentAPI.RabbitMQSender
 {
     public class RabbitMQMessageSender
         : IRabbitMQMessageSender
@@ -39,7 +39,7 @@ namespace Shopping.CartAPI.RabbitMQSender
                 WriteIndented = true,
             };
 
-            var json = JsonSerializer.Serialize((CheckoutHeaderVO)message, options);
+            var json = JsonSerializer.Serialize((UpdatePaymentResultMessage)message, options);
             var body = Encoding.UTF8.GetBytes(json);
             return body;
         }

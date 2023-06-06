@@ -1,25 +1,23 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using Shopping.OrderAPI.MessageConsumer;
-using Shopping.OrderAPI.Models.Context;
-using Shopping.OrderAPI.RabbitMQSender;
-using Shopping.OrderAPI.Repositories;
+using Shopping.PaymentAPI.MessageConsumer;
+using Shopping.PaymentAPI.RabbitMQSender;
+using Shopping.PaymentProcessor;
 
 var builder = WebApplication.CreateBuilder(args);
 
 var connectionString = builder.Configuration.GetConnectionString("MySQL");
 
-builder.Services.AddDbContext<MySQLContext>(options => options.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 31))));
+// builder.Services.AddDbContext<MySQLContext>(options => options.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 31))));
 
-var dbBuilder = new DbContextOptionsBuilder<MySQLContext>();
+//var dbBuilder = new DbContextOptionsBuilder<MySQLContext>();
 
-dbBuilder.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 31)));
+//dbBuilder.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 31)));
 
-builder.Services.AddSingleton(new OrderRepository(dbBuilder.Options));
-builder.Services.AddHostedService<RabbitMQCheckoutConsumer>();
-builder.Services.AddHostedService<RabbitMQPaymentConsumer>();
+builder.Services.AddSingleton<IProcessPayment, ProcessPayment>();
 builder.Services.AddSingleton<IRabbitMQMessageSender, RabbitMQMessageSender>();
+builder.Services.AddHostedService<RabbitMQPaymentConsumer>();
 
 builder.Services.AddControllers();
 
@@ -46,7 +44,6 @@ builder.Services.AddAuthorization(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
-    c.EnableAnnotations();
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Description = @"Enter 'Bearer' [space] and your token!",
@@ -76,7 +73,6 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 var app = builder.Build();
-
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

@@ -68,12 +68,13 @@ namespace Shopping.CartAPI.Repositories
 
         public async Task<CartVO> FindCartByUserId(string userId)
         {
-            var cart = new Cart();
-
-            cart.CartHeader = await _context.CartHeaders.FirstOrDefaultAsync(c => c.UserId == userId);
+            var cart = new Cart
+            {
+                CartHeader = await _context.CartHeaders.FirstOrDefaultAsync(c => c.UserId == userId)
+            };
 
             if (cart.CartHeader == null)
-                return null;
+                cart.CartHeader = new CartHeader();
 
             cart.CartDetails = _context.CartDetails
                 .Where(c => c.CartHeaderId == cart.CartHeader.Id)

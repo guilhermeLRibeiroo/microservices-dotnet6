@@ -21,7 +21,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integration", "Integration"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shopping.MessageBus", "Shopping.MessageBus\Shopping.MessageBus.csproj", "{10292D97-853D-42CB-90D3-1429F5781BFA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shopping.OrderAPI", "Shopping.OrderAPI\Shopping.OrderAPI.csproj", "{7CAC0079-64D8-4A40-98BD-7C9BC2933D0E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shopping.OrderAPI", "Shopping.OrderAPI\Shopping.OrderAPI.csproj", "{7CAC0079-64D8-4A40-98BD-7C9BC2933D0E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Payments", "Payments", "{2C017D66-4BB3-4205-B12A-46E368FD9184}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shopping.PaymentProcessor", "Shopping.PaymentProcessor\Shopping.PaymentProcessor.csproj", "{C8CF7965-8319-470E-9078-A2A51FA57C94}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shopping.PaymentAPI", "Shopping.PaymentAPI\Shopping.PaymentAPI.csproj", "{9A9CF29B-A795-4CA8-A5C0-C7FCEABA49E0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +63,14 @@ Global
 		{7CAC0079-64D8-4A40-98BD-7C9BC2933D0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7CAC0079-64D8-4A40-98BD-7C9BC2933D0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7CAC0079-64D8-4A40-98BD-7C9BC2933D0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8CF7965-8319-470E-9078-A2A51FA57C94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8CF7965-8319-470E-9078-A2A51FA57C94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8CF7965-8319-470E-9078-A2A51FA57C94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8CF7965-8319-470E-9078-A2A51FA57C94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A9CF29B-A795-4CA8-A5C0-C7FCEABA49E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A9CF29B-A795-4CA8-A5C0-C7FCEABA49E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A9CF29B-A795-4CA8-A5C0-C7FCEABA49E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A9CF29B-A795-4CA8-A5C0-C7FCEABA49E0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -69,6 +83,8 @@ Global
 		{CE3E8A97-9AA6-4799-9A76-D5F69F4FBACC} = {3320DA15-372A-4328-9A87-3E37F05696FC}
 		{10292D97-853D-42CB-90D3-1429F5781BFA} = {DF4476E6-7386-4705-A2CD-A480A98EEAA8}
 		{7CAC0079-64D8-4A40-98BD-7C9BC2933D0E} = {3320DA15-372A-4328-9A87-3E37F05696FC}
+		{C8CF7965-8319-470E-9078-A2A51FA57C94} = {2C017D66-4BB3-4205-B12A-46E368FD9184}
+		{9A9CF29B-A795-4CA8-A5C0-C7FCEABA49E0} = {3320DA15-372A-4328-9A87-3E37F05696FC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E437BE71-FCFE-409B-A6C4-F1A7BBD31964}
