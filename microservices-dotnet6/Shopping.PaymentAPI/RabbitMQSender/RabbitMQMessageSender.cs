@@ -13,6 +13,9 @@ namespace Shopping.PaymentAPI.RabbitMQSender
         private readonly string _password;
         private readonly string _userName;
         private IConnection _connection;
+        private const string ExchangeName = "DirectPaymentUpdateExchange";
+        private const string PaymentEmailUpdateQueueName = "PaymentEmailUpdateQueue";
+        private const string PaymentOrderUpdateQueueName = "PaymentOrderUpdateQueue";
 
         public RabbitMQMessageSender()
         {
@@ -20,15 +23,23 @@ namespace Shopping.PaymentAPI.RabbitMQSender
             _password = "guest";
             _userName = "guest";
         }
-        public void Send(BaseMessage message, string queueName)
+        public void Send(BaseMessage message)
         {
             if (ConnectionExists())
             {
                 using var channel = _connection.CreateModel();
-                channel.QueueDeclare(queue: queueName, false, false, false, arguments: null);
+                channel.ExchangeDeclare(ExchangeName, ExchangeType.Direct, durable: false);
+
+                channel.QueueDeclare(PaymentEmailUpdateQueueName, false, false, false, null);
+                channel.QueueDeclare(PaymentOrderUpdateQueueName, false, false, false, null);
+
+                channel.QueueBind(PaymentEmailUpdateQueueName, ExchangeName, "PaymentEmail");
+                channel.QueueBind(PaymentOrderUpdateQueueName, ExchangeName, "PaymentOrder");
 
                 byte[] body = GetMessageAsByteArr(message);
-                channel.BasicPublish(exchange: "", routingKey: queueName, basicProperties: null, body: body);
+
+                channel.BasicPublish(exchange: ExchangeName, "PaymentEmail", basicProperties: null, body: body);
+                channel.BasicPublish(exchange: ExchangeName, "PaymentOrder", basicProperties: null, body: body);
             }
         }
 

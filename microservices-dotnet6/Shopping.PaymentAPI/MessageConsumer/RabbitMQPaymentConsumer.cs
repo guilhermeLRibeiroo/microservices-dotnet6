@@ -63,7 +63,7 @@ namespace Shopping.PaymentAPI.MessageConsumer
 
             try
             {
-                _rabbitMQMessageSender.Send(paymentResult, "orderpaymentresultqueue");
+                _rabbitMQMessageSender.Send(paymentResult);
             }
             catch (Exception)
             {
