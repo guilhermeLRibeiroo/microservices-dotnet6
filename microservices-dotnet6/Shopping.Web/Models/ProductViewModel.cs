@@ -12,7 +12,7 @@ namespace Shopping.Web.Models
         public string? ImageURL { get; set; }
 
         [Range(1, 100)]
-        public int Count { get; set; }
+        public int Count { get; set; } = 1;
 
         public string SubstringName()
         {

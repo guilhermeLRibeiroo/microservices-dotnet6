@@ -39,11 +39,18 @@ Benefícios de microserviços incluem:
 
 No entanto, usar microserviços apresenta desafios como a complexidade entre serviços, a necessidade de gerenciar a consistência de dados distribuídos e a sobrecarga adicional na infraestrutura de implantação.
 
+# Quais as desvantagem do cliente se comunicar diretamente com os microserviços?
 
-# Como rodar o projeto?
+Embora uma comunicação direta pareça ser uma abordagem eficiente e descentralizada, algumas das desvantagens são:
 
-Precisa rodar um docker container com o MySQL e criar no banco de dados as Databases "shopping_cart_api", "shopping_product_api" e "shopping_identity_server"
-Comando para rodar o docker container "docker run -p 3306:3306 --name mysql -e MYSQL_ROOT_PASSWORD=rootpwd -d mysql"
-Executar "dotnet ef database update" para aplicar as migrations nos projetos correspondentes
+1. Acoplamento entre cliente e microserviço: Os clientes precisam saber os detalhes de implementação dos serviços, qualquer alteração nesses serviços pode exigir modificações significativas nos clientes. Isso pode levar a um cenário onde uma pequena alteração no serviço pode levar a várias modificações nos clientes, o que torna o sistema menos flexível e suscetível a falhas.
 
-RabbitMQ docker container "docker run -d hostname shopping-rabbit --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3-management"
+2. Segurança e Autorização: Quando o cliente se comunica diretamente com os microserviços, a gestão da segurança e autorização pode se tornar complexa, cada cliente precisa lidar com a autorização de cada serviço separadamente, isso pode levar a inconsistências na apllicação de politicas de segurança e tornar o sistema mais vulnerável a erros e violações de segurança. 
+
+3. Escalabilidade limitada: A comunicação direta entre o cliente e os microserviços pode dificultar a escalabilidade horizontal. Se o número de clientes ou a carga de solicitações aumentar significativamente, pode ser necessário ajustar manualmente ou redistribuir as solicitações entre os microserviços para evitar gargalos.
+
+# Como lidar com isso?
+
+Uma forma é utilizar um API Gateway para intermediar a comunicação entre os clientes e os microserviços, o API Gateway pode lidar com a complexidade da comunicação, fornecer uma interface abstrata e simplificada para os clientes e gerenciar a autenticação, autorização e controle de acesso.
+
+Com um API Gateway também é possível a coleta centralizada de métricas, logs e informações de monitoramento, versionamento de APIs, cache e load balancer.

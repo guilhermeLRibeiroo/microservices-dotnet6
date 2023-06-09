@@ -24,10 +24,10 @@ namespace Shopping.CartAPI.Controllers
             _rabbitMQMessageSender = rabbitMQMessageSender ?? throw new ArgumentNullException(nameof(rabbitMQMessageSender));
         }
 
-        [HttpGet("find-cart/{id}")]
-        public async Task<ActionResult<CartVO>> FindCart(string id)
+        [HttpGet("find-cart/{userId}")]
+        public async Task<ActionResult<CartVO>> FindCart(string userId)
         {
-            var cart = await _cartRepository.FindCartByUserId(id);
+            var cart = await _cartRepository.FindCartByUserId(userId);
             if (cart == null) return NotFound();
             return Ok(cart);
         }

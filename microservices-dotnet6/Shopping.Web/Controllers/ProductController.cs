@@ -70,7 +70,7 @@ namespace Shopping.Web.Controllers
                     return RedirectToAction(nameof(Index));
             }
 
-            return View(product);
+            return View(nameof(Edit), product);
         }
 
         [Authorize]

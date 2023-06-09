@@ -5,6 +5,7 @@ namespace Shopping.CartAPI.Models
 {
     [Table("product")]
     public class Product
+        : IEquatable<Product>
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
         [Column("id")]
@@ -17,7 +18,7 @@ namespace Shopping.CartAPI.Models
 
         [Column("price")]
         [Required]
-        [Range(0 , 10000)]
+        [Range(0, 10000)]
         public decimal Price { get; set; }
 
         [Column("description")]
@@ -31,5 +32,27 @@ namespace Shopping.CartAPI.Models
         [Column("image_url")]
         [StringLength(300)]
         public string? ImageURL { get; set; }
+
+        public bool Equals(Product? other)
+        {
+            if (other == null)
+                return false;
+
+            return this.Id == other.Id
+                && this.Name == other.Name
+                && this.Price == other.Price
+                && this.Description == other.Description
+                && this.CategoryName == other.CategoryName
+                && this.ImageURL == other.ImageURL;
+        }
+
+        public void UpdateProperties(Product product)
+        {
+            this.Name = product.Name;
+            this.Price = product.Price;
+            this.Description = product.Description;
+            this.CategoryName = product.CategoryName;
+            this.ImageURL = product.ImageURL;
+        }
     }
 }

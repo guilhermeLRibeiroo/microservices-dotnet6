@@ -97,10 +97,5 @@ namespace Shopping.Web.Services
              
             return await response.ReadContentAs<CartHeaderViewModel>();
         }
-
-        public Task<bool> ClearCart(string userId, string accessToken)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

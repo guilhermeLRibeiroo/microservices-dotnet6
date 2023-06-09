@@ -113,7 +113,7 @@ namespace Shopping.CartAPI.Repositories
         {
             var cart = _mapper.Map<Cart>(cartVO);
 
-            await CheckIfProductIsAlreadySavedElseSave(cart.CartDetails.FirstOrDefault().Product);
+            await UpdateOrSaveProduct(cart.CartDetails.FirstOrDefault().Product);
 
             var cartHeader = await _context.CartHeaders.AsNoTracking().FirstOrDefaultAsync(c => c.UserId == cart.CartHeader.UserId);
 
@@ -160,7 +160,7 @@ namespace Shopping.CartAPI.Repositories
             return _mapper.Map<CartVO>(cart);
         }
 
-        public async Task CheckIfProductIsAlreadySavedElseSave(Product product)
+        public async Task UpdateOrSaveProduct(Product product)
         {
             var productFromDB = await _context
                                     .Products
@@ -169,6 +169,12 @@ namespace Shopping.CartAPI.Repositories
             if (productFromDB == null)
             {
                 _context.Products.Add(product);
+                await _context.SaveChangesAsync();
+            }
+            else if(!productFromDB.Equals(product)) 
+            {
+                productFromDB.UpdateProperties(product);
+                _context.Products.Update(productFromDB);
                 await _context.SaveChangesAsync();
             }
         }
