@@ -1,0 +1,236 @@
+﻿{
+  "Routes": [
+    //"ProductAPI": "https://localhost:52072",
+    // Product - FindAll
+    {
+      "DownstreamPathTemplate": "/api/v1/product/",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 52072
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/product/",
+      "UpstreamHttpMethod": [
+        "GET"
+      ]
+    },
+    // Product - FindById
+    {
+      "DownstreamPathTemplate": "/api/v1/product/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 52072
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/product/{id}",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [ "shopping" ]
+      }
+    },
+    // Product - Create and Update
+    {
+      "DownstreamPathTemplate": "/api/v1/product",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 52072
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/product",
+      "UpstreamHttpMethod": [
+        "POST",
+        "PUT"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [ "shopping" ]
+      }
+    },
+    // Product - Delete
+    {
+      "DownstreamPathTemplate": "/api/v1/product/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 52072
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/product/{id}",
+      "UpstreamHttpMethod": [
+        "DELETE"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [ "shopping" ]
+      }
+    },
+    //"CartAPI": "https://localhost:52076",
+    // Cart - FindById
+    {
+      "DownstreamPathTemplate": "/api/v1/cart/find-cart/{userId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 52076
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/cart/find-cart/{userId}",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [ "shopping" ]
+      }
+    },
+    // Cart - Add
+    {
+      "DownstreamPathTemplate": "/api/v1/cart/add-cart",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 52076
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/cart/add-cart",
+      "UpstreamHttpMethod": [
+        "POST"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [ "shopping" ]
+      }
+    },
+    // Cart - Update
+    {
+      "DownstreamPathTemplate": "/api/v1/cart/update-cart",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 52076
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/cart/update-cart",
+      "UpstreamHttpMethod": [
+        "PUT"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [ "shopping" ]
+      }
+    },
+    // Cart - Remove
+    {
+      "DownstreamPathTemplate": "/api/v1/cart/remove-cart/{cartDetailId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 52076
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/cart/remove-cart/{cartDetailId}",
+      "UpstreamHttpMethod": [
+        "DELETE"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [ "shopping" ]
+      }
+    },
+    // Cart - ApplyCoupon
+    {
+      "DownstreamPathTemplate": "/api/v1/cart/apply-coupon",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 52076
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/cart/apply-coupon",
+      "UpstreamHttpMethod": [
+        "POST"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [ "shopping" ]
+      }
+    },
+    // Cart - ApplyCoupon
+    {
+      "DownstreamPathTemplate": "/api/v1/cart/remove-coupon/{userId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 52076
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/cart/remove-coupon/{userId}",
+      "UpstreamHttpMethod": [
+        "DELETE"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [ "shopping" ]
+      }
+    },
+    // Cart - Checkout
+    {
+      "DownstreamPathTemplate": "/api/v1/cart/checkout",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 52076
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/cart/checkout",
+      "UpstreamHttpMethod": [
+        "POST"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [ "shopping" ]
+      }
+    },
+
+    //"CouponAPI": "https://localhost:52078",
+    // Coupon GetCouponByCode
+    {
+      "DownstreamPathTemplate": "/api/v1/coupon/{code}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 52078
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/coupon/{code}",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [ "shopping" ]
+      }
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "https://localhost:52090"
+  }
+}

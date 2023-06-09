@@ -1,0 +1,12 @@
+﻿using Shopping.MessageBus;
+
+namespace Shopping.PaymentAPI.Messages
+{
+    public class UpdatePaymentResultMessage
+        : BaseMessage
+    {
+        public long OrderId { get; set; }
+        public string Email { get; set; }
+        public bool Status { get; set; }
+    }
+}
