@@ -58,7 +58,10 @@ Com um API Gateway também é possível a coleta centralizada de métricas, logs
 # Como rodar o projeto?
 
 Deixei um docker-compose para facilitar levantar o RabbitMQ e o MySQL. 
-É necessário abrir a conexão com o MySQL utilizando alguma ferramenta como o HeidiSQL. 
+
+<img src="https://github.com/guilhermeLRibeiroo/microservices-dotnet6/assets/48655138/a5389999-40ae-4051-beff-662fc8ebc428"></img>
+
+É necessário abrir a conexão com o MySQL para criar os bancos de dados. (eu utilizei HeidiSQL)
 
 ```
     IP: 127.0.0.1
@@ -76,4 +79,13 @@ E adicionar as seguintes databases:
 + shopping_cart_api
 + shopping_identity_server
 
-Adicionei um código que aplica as migrations nos contexts pela primeira vez assim que iniciar o projeto, não esquecer de selecionar "Multiple startup projects" na configuração de projeto inicial e definir como Start todos menos "DatabaseMigrations", "PaymentProcessor" e "MessageBus" pois são class libraries.
+E é para ficar assim:
+
+<img src="https://github.com/guilhermeLRibeiroo/microservices-dotnet6/assets/48655138/bce40ecb-b22f-4ff0-8a16-5592c68756c4"></img>
+
+Adicionei um código que aplica as migrations nos DbContexts uma única vez assim que iniciar o projeto.
+### Não esquecer de selecionar "Multiple startup projects" na configuração de projeto inicial e definir como Start todos menos "DatabaseMigrations", "PaymentProcessor" e "MessageBus" pois são class libraries.
+
+<img src="https://github.com/guilhermeLRibeiroo/microservices-dotnet6/assets/48655138/4be51f4d-7f96-408f-aaa7-ddfb7c2628ef"></img>
+
+Depois disso é só dar Start no VisualStudio.
