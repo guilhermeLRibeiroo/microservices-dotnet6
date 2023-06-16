@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Shopping.DatabaseMigrations;
 
 namespace IdentityServer.Models.Context
 {
@@ -8,6 +9,6 @@ namespace IdentityServer.Models.Context
         : IdentityDbContext<ApplicationUser>
     {
         public MySQLContext() { }
-        public MySQLContext(DbContextOptions<MySQLContext> options) : base(options) { }
+        public MySQLContext(DbContextOptions<MySQLContext> options) : base(options) { this.ApplyMigrations(); }
     }
 }

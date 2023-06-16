@@ -1,13 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Shopping.DatabaseMigrations;
 
 namespace Shopping.ProductAPI.Models.Context
 {
-    #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
     public class MySQLContext
         : DbContext
     {
         public MySQLContext() { }
-        public MySQLContext(DbContextOptions<MySQLContext> options) : base(options) { }
+        public MySQLContext(DbContextOptions<MySQLContext> options) : base(options) { this.ApplyMigrations(); }
 
         public DbSet<Product> Products { get; set; }
 

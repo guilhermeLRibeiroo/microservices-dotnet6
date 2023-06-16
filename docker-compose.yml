@@ -1,0 +1,21 @@
+version: '3.4'
+
+services:
+  mysql:
+    container_name: 'shopping-mysql'
+    image: mysql
+    hostname: 'shopping-mysql'
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpwd
+    volumes:
+      - ./data/var/lib/mysql:/var/lib/mysql
+    ports:
+      - '3306:3306'
+  rabbitmq:
+    container_name: 'shopping-rabbitmq'
+    image: rabbitmq:3-management
+    hostname: 'shopping-rabbitmq'
+    ports:
+      - 5672:5672 
+      - 15672:15672
+    
