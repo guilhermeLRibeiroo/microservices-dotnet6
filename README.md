@@ -54,3 +54,26 @@ Embora uma comunicação direta pareça ser uma abordagem eficiente e descentral
 Uma forma é utilizar um API Gateway para intermediar a comunicação entre os clientes e os microserviços, o API Gateway pode lidar com a complexidade da comunicação, fornecer uma interface abstrata e simplificada para os clientes e gerenciar a autenticação, autorização e controle de acesso.
 
 Com um API Gateway também é possível a coleta centralizada de métricas, logs e informações de monitoramento, versionamento de APIs, cache e load balancer.
+
+# Como rodar o projeto?
+
+Deixei um docker-compose para facilitar levantar o RabbitMQ e o MySQL. 
+É necessário abrir a conexão com o MySQL utilizando alguma ferramenta como o HeidiSQL. 
+
+```
+    IP: 127.0.0.1
+    Porta: 3306
+    User: root
+    Password: rootpwd
+```
+
+E adicionar as seguintes databases:
+
++ shopping_product_api
++ shopping_order_api
++ shopping_email
++ shopping_coupon_api
++ shopping_cart_api
++ shopping_identity_server
+
+Adicionei um código que aplica as migrations nos contexts pela primeira vez assim que iniciar o projeto, não esquecer de selecionar "Multiple startup projects" na configuração de projeto inicial e definir como Start todos menos "DatabaseMigrations", "PaymentProcessor" e "MessageBus" pois são class libraries.
